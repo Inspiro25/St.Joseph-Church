@@ -163,30 +163,75 @@ a:active {
 .admin-panel {
     margin-top: 2rem;
     padding: 1rem;
-    background-color: #f4f9fc;
+    background-color: #f9fafb;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 8px;  /* Increased border radius for a modern feel */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* Added shadow for depth */
+    transition: all 0.3s ease;
+}
+
+.admin-panel:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);  /* Added hover effect for depth */
 }
 
 .admin-panel h3 {
     color: #03fcf8;
+    font-size: 24px;
+    margin-bottom: 1rem;
+    text-align: center;  /* Centered the header */
+    font-weight: 600;
 }
 
 .admin-panel table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 1rem;
+    font-size: 14px;  /* Increased font size for readability */
 }
 
-.admin-panel table th, .admin-panel table td {
+.admin-panel table th,
+.admin-panel table td {
     border: 1px solid #ddd;
-    padding: 0.5rem;
+    padding: 12px 20px;  /* More padding for better spacing */
     text-align: left;
+    transition: background-color 0.3s ease;
 }
 
 .admin-panel table th {
     background-color: #e6f7ff;
+    font-weight: bold;
 }
+
+.admin-panel table tr:nth-child(even) {
+    background-color: #f2f7fc;  /* Alternating row colors for better readability */
+}
+
+.admin-panel table tr:hover {
+    background-color: #f4f9fc;  /* Slight hover effect for table rows */
+    cursor: pointer;  /* Indicates that rows are interactive */
+}
+
+.admin-panel table th,
+.admin-panel table td {
+    border-radius: 4px;
+}
+
+/* For small screens */
+@media (max-width: 768px) {
+    .admin-panel table th, .admin-panel table td {
+        padding: 10px;
+        font-size: 12px;  /* Adjust font size on smaller screens */
+    }
+
+    .admin-panel {
+        padding: 15px;
+    }
+
+    .admin-panel h3 {
+        font-size: 20px;
+    }
+}
+
 
 .modal {
     display: none;
