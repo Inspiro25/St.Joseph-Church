@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St.Jospeh Church</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: url('https://i.imgur.com/uHFMzt8.jpeg') no-repeat center center fixed;
+        background-size: cover;
+        color: #333;
+    }
+
+    /* Adjusting containers for readability */
+    .container, .about-section, .admin-panel, .bill-info {
+        background-color: rgba(255, 255, 255, 0.9); /* Slight white background for readability */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    header {
+        background-color: rgba(248, 119, 33, 0.8);
+        color: white;
+        padding: 1rem 0;
+        text-align: center;
+        position: relative;
+    }
+
+    .login-form input {
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .about-section {
+        background-color: rgba(0, 51, 102, 0.8)
+    }
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 36px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        /* Login Form Styling */
+        .login-form {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .login-form input {
+            width: 70%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 16px;
+            color: #333;
+            outline: none;
+            transition: border 0.3s ease;
+        }
+
+        .login-form input:focus {
+            border-color: #3498db;
+        }
+
+        .login-form button {
+            padding: 15px 30px;
+            background-color: #3498db;
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-left: 15px; /* Position button to the right */
+        }
+
+        .login-form button:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+        }
+
+        .login-form button:active {
+            transform: translateY(0);
+        }
+
+        /* Animation for Header */
+        @keyframes fadeInHeader {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            animation: fadeInHeader 1s ease-out;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .login-form input {
+                width: 60%;
+                font-size: 14px;
+            }
+
+            .login-form button {
+                font-size: 16px;
+                padding: 12px 25px;
+                margin-left: 10px;
+            }
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 36px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* Paragraph Styling */
+        p {
+            font-size: 18px;
+            color: #34495e;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Link Button Styling */
+        a {
+            display: inline-block;
+            margin: 10px;
+            padding: 15px 40px;
+            background: linear-gradient(to right, #03fcf8, #03fcf8);
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            transform: translateY(0px);
+        }
+
+        /* Button Hover Effect */
+        a:hover {
+            background: linear-gradient(to right, #03fcf8, #03fcf8);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Link Button Active State */
+        a:active {
+            transform: translateY(0px);
+        }
+
+        /* Button Container Styling */
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Fade In Animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 30px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            a {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+        }
+
+        button {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background-color: #03fcf8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #cc5200;
+        }
+
+        .about-section {
+            background: #003366;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            border-radius: 8px;
+        }
+
+        .about-section h2 {
+            margin-bottom: 1rem;
+        }
+
+        .bill-info {
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #e6f7ff;
+        }
+
+        .admin-panel {
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f4f9fc;
+        }
+
+        .admin-panel h3 {
+            color: #03fcf8;
+        }
+
+        .admin-panel table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .admin-panel table th, .admin-panel table td {
+            border: 1px solid #ddd;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        .admin-panel table th {
+            background-color: #e6f7ff;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 400px;
+        }
+
+        .modal-content label {
+            display: block;
+            margin-top: 1rem;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>St.Jospeh Church,Arabi</h1>
+        <form class="login-form" id="loginForm">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </header>
+
+    <div class="container">
+        <h2>Welcome to St. Joseph's Church</h2>
+        <p>St. Joseph's Church in Arabi, Ulikkal, is a prominent Catholic parish located in the Kannur district of Kerala, India. The church is part of the Diocese of Thalassery, which is dedicated to St. Joseph.</p>
+        
+        <p>The church was entrusted to the Missionaries of St. Francis de Sales (MSFS) in 2000. The first parish priest appointed was Fr. Tomichan Chirakalpuraidom.</p>
+        
+        <p>The church is situated in the village of Arabi, within the Ulikkal Panchayat. Ulikkal is a hilly area known for its agrarian economy, with major crops including rubber, cashew, coconut, and areca nut. The region is also home to several other places of worship, such as St. Mary's Church in Thermala and St. George's Church in Puravayal.</p>
+        
+        <div class="button-container">
+            <a href="https://www.keralawindow.net/Syromala%20diocese_TLRY.html" target="_blank">Learn More About the Diocese</a>
+            <a href="https://msfssouthwest.com/st-josephs-church-ulickal.html" target="_blank">Discover More About the Church</a>
+            <a href="https://www.youtube.com/%40stjosephchurchulikkal9926" target="_blank">Visit Our YouTube Channel</a>
+        </div>
+    </div>
+
+        <div class="bill-info" id="billInfo" style="display: none;">
+            <h3>Billing Information</h3>
+            <p>Welcome, <span id="memberName"></span>.</p>
+            <div class="bill-details">
+                <p><strong>Monthly Collection:</strong> $<span id="monthlyCollection"></span></p>
+                <p><strong>Cleaning Fee:</strong> $<span id="cleaningFee"></span></p>
+                <p><strong>Funeral Charity Fund:</strong> $<span id="funeralCharityFund"></span></p>
+                <p><strong>Basic Work Contribution:</strong> $<span id="basicWork"></span></p>
+                <p><strong>Total Due Amount:</strong> $<span id="totalDue"></span></p>
+            </div>
+        </div>
+
+        <div class="admin-panel" id="adminPanel" style="display: none;">
+            <h3>Admin Panel</h3>
+            <form id="addMemberForm">
+                <label for="newUsername">Username:</label>
+                <input type="text" id="newUsername" name="newUsername" placeholder="Enter username">
+
+                <label for="newPassword">Password:</label>
+                <input type="text" id="newPassword" name="newPassword" placeholder="Enter password">
+
+                <label for="newMonthlyCollection">Monthly Collection:</label>
+                <input type="number" id="newMonthlyCollection" name="newMonthlyCollection" placeholder="Enter amount">
+
+                <label for="newCleaningFee">Cleaning Fee:</label>
+                <input type="number" id="newCleaningFee" name="newCleaningFee" placeholder="Enter amount">
+
+                <label for="newFuneralCharityFund">Funeral Charity Fund:</label>
+                <input type="number" id="newFuneralCharityFund" name="newFuneralCharityFund" placeholder="Enter amount">
+
+                <label for="newBasicWork">Basic Work:</label>
+                <input type="number" id="newBasicWork" name="newBasicWork" placeholder="Enter amount">
+
+                <button type="button" id="addMemberButton">Add Member</button>
+            </form>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Monthly</th>
+                        <th>Cleaning</th>
+                        <th>Charity</th>
+                        <th>Work</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="membersTable">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <h3>Edit Billing Details</h3>
+            <form id="editForm">
+                <label for="editMonthlyCollection">Monthly Collection:</label>
+                <input type="number" id="editMonthlyCollection" name="editMonthlyCollection">
+
+                <label for="editCleaningFee">Cleaning Fee:</label>
+                <input type="number" id="editCleaningFee" name="editCleaningFee">
+
+                <label for="editFuneralCharityFund">Funeral Charity Fund:</label>
+                <input type="number" id="editFuneralCharityFund" name="editFuneralCharityFund">
+
+                <label for="editBasicWork">Basic Work:</label>
+                <input type="number" id="editBasicWork" name="editBasicWork">
+
+                <button type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="about-section">
+        <h2>About Us</h2>
+        <p>Our church is a community of believers committed to worship, fellowship, and service. 
+           We strive to make a positive impact on our members and society through our faith and dedication.</p>
+    </div>
+
+    <script>
+        const members = {
+            'admin': {
+                name: 'Admin',
+                password: 'admin123',
+                isAdmin: true
+            },
+            'john_doe': {
+                name: 'John Doe',
+                password: '1234',
+                billing: {
+                    monthlyCollection: 20,
+                    cleaningFee: 10,
+                    funeralCharityFund: 15,
+                    basicWork: 5,
+                }
+            },
+            'jane_smith': {
+                name: 'Jane Smith',
+                password: 'abcd',
+                billing: {
+                    monthlyCollection: 25,
+                    cleaningFee: 12,
+                    funeralCharityFund: 20,
+                    basicWork: 8,
+                }
+            }
+        };
+
+        const loginForm = document.getElementById('loginForm');
+        const billInfo = document.getElementById('billInfo');
+        const adminPanel = document.getElementById('adminPanel');
+        const memberName = document.getElementById('memberName');
+        const membersTable = document.getElementById('membersTable');
+        const editModal = document.getElementById('editModal');
+        const editForm = document.getElementById('editForm');
+        let currentEditMember = '';
+
+        function updateMembersTable() {
+            membersTable.innerHTML = '';
+            Object.keys(members).forEach(username => {
+                if (!members[username].isAdmin) {
+                    const member = members[username];
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${username}</td>
+                        <td>${member.name}</td>
+                        <td>${member.billing?.monthlyCollection || 0}</td>
+                        <td>${member.billing?.cleaningFee || 0}</td>
+                        <td>${member.billing?.funeralCharityFund || 0}</td>
+                        <td>${member.billing?.basicWork || 0}</td>
+                        <td>
+                            <button onclick="editMember('${username}')">Edit</button>
+                            <button onclick="removeMember('${username}')">Remove</button>
+                        </td>
+                    `;
+                    membersTable.appendChild(row);
+                }
+            });
+        }
+
+        function removeMember(username) {
+            delete members[username];
+            updateMembersTable();
+        }
+
+        function editMember(username) {
+            currentEditMember = username;
+            const member = members[username];
+            document.getElementById('editMonthlyCollection').value = member.billing.monthlyCollection;
+            document.getElementById('editCleaningFee').value = member.billing.cleaningFee;
+            document.getElementById('editFuneralCharityFund').value = member.billing.funeralCharityFund;
+            document.getElementById('editBasicWork').value = member.billing.basicWork;
+            editModal.style.display = 'flex';
+        }
+
+        editForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const member = members[currentEditMember];
+            member.billing.monthlyCollection = parseFloat(document.getElementById('editMonthlyCollection').value);
+            member.billing.cleaningFee = parseFloat(document.getElementById('editCleaningFee').value);
+            member.billing.funeralCharityFund = parseFloat(document.getElementById('editFuneralCharityFund').value);
+            member.billing.basicWork = parseFloat(document.getElementById('editBasicWork').value);
+            editModal.style.display = 'none';
+            updateMembersTable();
+        });
+
+        document.getElementById('addMemberButton').addEventListener('click', () => {
+            const newUsername = document.getElementById('newUsername').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const newMonthlyCollection = parseFloat(document.getElementById('newMonthlyCollection').value);
+            const newCleaningFee = parseFloat(document.getElementById('newCleaningFee').value);
+            const newFuneralCharityFund = parseFloat(document.getElementById('newFuneralCharityFund').value);
+            const newBasicWork = parseFloat(document.getElementById('newBasicWork').value);
+
+            members[newUsername] = {
+                name: newUsername,
+                password: newPassword,
+                billing: {
+                    monthlyCollection: newMonthlyCollection,
+                    cleaningFee: newCleaningFee,
+                    funeralCharityFund: newFuneralCharityFund,
+                    basicWork: newBasicWork
+                }
+            };
+
+            updateMembersTable();
+        });
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (members[username] && members[username].password === password) {
+                if (members[username].isAdmin) {
+                    adminPanel.style.display = 'block';
+                    billInfo.style.display = 'none';
+                    updateMembersTable();
+                } else {
+                    const billing = members[username].billing;
+                    memberName.textContent = members[username].name;
+                    document.getElementById('monthlyCollection').textContent = billing.monthlyCollection;
+                    document.getElementById('cleaningFee').textContent = billing.cleaningFee;
+                    document.getElementById('funeralCharityFund').textContent = billing.funeralCharityFund;
+                    document.getElementById('basicWork').textContent = billing.basicWork;
+                    document.getElementById('totalDue').textContent = billing.monthlyCollection + billing.cleaningFee + billing.funeralCharityFund + billing.basicWork;
+                    billInfo.style.display = 'block';
+                    adminPanel.style.display = 'none';
+                }
+            } else {
+                alert('Invalid username or password!');
+                billInfo.style.display = 'none';
+                adminPanel.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
