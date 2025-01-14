@@ -1,548 +1,428 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>St.Jospeh Church</title>
-<style>
-    body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: url('https://i.imgur.com/uHFMzt8.jpeg') no-repeat center center fixed;
-    background-size: cover;
-    color: #333;
-    overflow-x: hidden;
-}
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-header {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: white;
-    padding: 20px;
-    text-align: center;
-    border-radius: 8px;
-    box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.3);
-    animation: fadeInHeader 1s ease-out;
-}
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-h1 {
-    font-size: 32px;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-}
+        <title>St.Joseph Church</title>
 
-.login-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 20px auto;
-    width: 100%;
-    max-width: 400px;
-}
-
-.login-form input {
-    width: 100%;
-    padding: 15px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 30px;
-    font-size: 16px;
-    color: #333;
-    outline: none;
-    transition: border 0.3s ease;
-}
-
-.login-form input:focus {
-    border-color: #3498db;
-}
-
-.login-form button {
-    width: 100%;
-    padding: 15px;
-    background-color: #3498db;
-    border: none;
-    border-radius: 30px;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-top: 10px;
-}
-
-.login-form button:hover {
-    background-color: #2980b9;
-    transform: translateY(-3px);
-}
-
-.login-form button:active {
-    transform: translateY(0);
-}
-
-@keyframes fadeInHeader {
-    0% {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-h2 {
-    text-align: center;
-    color: #2c3e50;
-    font-size: 28px;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-}
-
-p {
-    font-size: 16px;
-    color: #34495e;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-a {
-    display: inline-block;
-    margin: 10px;
-    padding: 15px 40px;
-    background: linear-gradient(to right, #03fcf8, #03fcf8);
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    border-radius: 30px;
-    text-align: center;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    transform: translateY(0px);
-}
-
-a:hover {
-    background: linear-gradient(to right, #03fcf8, #03fcf8);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-}
-
-a:active {
-    transform: translateY(0px);
-}
-
-.container, .about-section, .admin-panel, .bill-info {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin: 20px;
-    padding: 20px;
-}
-
-.about-section {
-    background: rgba(0, 51, 102, 0.8);
-    color: white;
-    text-align: center;
-    padding: 2rem;
-    margin-top: 2rem;
-    border-radius: 8px;
-}
-
-.about-section h2 {
-    margin-bottom: 1rem;
-}
-
-.bill-info {
-    margin-top: 2rem;
-    padding: 1rem;
-    background-color: #e6f7ff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.admin-panel {
-    margin-top: 2rem;
-    padding: 1rem;
-    background-color: #f9fafb;
-    border: 1px solid #ddd;
-    border-radius: 8px;  /* Increased border radius for a modern feel */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* Added shadow for depth */
-    transition: all 0.3s ease;
-}
-
-.admin-panel:hover {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);  /* Added hover effect for depth */
-}
-
-.admin-panel h3 {
-    color: #03fcf8;
-    font-size: 24px;
-    margin-bottom: 1rem;
-    text-align: center;  /* Centered the header */
-    font-weight: 600;
-}
-
-.admin-panel table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-    font-size: 14px;  /* Increased font size for readability */
-}
-
-.admin-panel table th,
-.admin-panel table td {
-    border: 1px solid #ddd;
-    padding: 12px 20px;  /* More padding for better spacing */
-    text-align: left;
-    transition: background-color 0.3s ease;
-}
-
-.admin-panel table th {
-    background-color: #e6f7ff;
-    font-weight: bold;
-}
-
-.admin-panel table tr:nth-child(even) {
-    background-color: #f2f7fc;  /* Alternating row colors for better readability */
-}
-
-.admin-panel table tr:hover {
-    background-color: #f4f9fc;  /* Slight hover effect for table rows */
-    cursor: pointer;  /* Indicates that rows are interactive */
-}
-
-.admin-panel table th,
-.admin-panel table td {
-    border-radius: 4px;
-}
-
-/* For small screens */
-@media (max-width: 768px) {
-    .admin-panel table th, .admin-panel table td {
-        padding: 10px;
-        font-size: 12px;  /* Adjust font size on smaller screens */
-    }
-
-    .admin-panel {
-        padding: 15px;
-    }
-
-    .admin-panel h3 {
-        font-size: 20px;
-    }
-}
-
-
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    width: 400px;
-}
-
-.modal-content label {
-    display: block;
-    margin-top: 1rem;
-}
-
-.modal-content input {
-    width: 100%;
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-/* Mobile-first styles */
-@media (max-width: 768px) {
-    header {
-        padding: 15px;
-    }
-
-    h1 {
-        font-size: 28px;
-    }
-
-    .login-form input,
-    .login-form button {
-        width: 100%;
-    }
-
-    .login-form input {
-        padding: 12px;
-        font-size: 14px;
-    }
-
-    .login-form button {
-        padding: 12px;
-        font-size: 16px;
-    }
-
-    .container {
-        padding: 20px;
-    }
-
-    h2 {
-        font-size: 24px;
-    }
-
-    p {
-        font-size: 14px;
-    }
-
-    a {
-        padding: 12px 30px;
-        font-size: 16px;
-    }
-
-    .about-section {
-        padding: 1rem;
-    }
-}
-
-    </style>
-</head>
-<body>
-    <header>
-        <h1>St.Jospeh Church,Arabi</h1>
-        <form class="login-form" id="loginForm">
-            <input type="text" id="username" name="username" placeholder="Username" required>
-            <input type="password" id="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-    </header>
-
-    <div class="container">
-        <h2>Welcome to St. Joseph's Church</h2>
-        <p>St. Joseph's Church in Arabi, Ulikkal, is a prominent Catholic parish located in the Kannur district of Kerala, India. The church is part of the Diocese of Thalassery, which is dedicated to St. Joseph.</p>
+        <!-- CSS FILES -->                
+        <link rel="preconnect" href="https://fonts.googleapis.com">
         
-        <p>The church is situated in the village of Arabi, within the Ulikkal Panchayat. Ulikkal is a hilly area known for its agrarian economy, with major crops including rubber, cashew, coconut, and areca nut. The region is also home to several other places of worship, such as St. Mary's Church in Thermala and St. George's Church in Puravayal.</p>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,400;0,600;0,700;1,200;1,700&display=swap" rel="stylesheet">
+            
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+
+        <link href="css/vegas.min.css" rel="stylesheet">
+
+        <link href="css/tooplate-barista.css" rel="stylesheet">
         
-        <div class="button-container">
-            <a href="https://www.keralawindow.net/Syromala%20diocese_TLRY.html" target="_blank">Learn More About the Diocese</a>
-            <a href="https://www.archdioceseoftellicherry.org/sacellum/parishes/view_details/9" target="_blank">Discover More About the Church</a>
-        </div>
-    </div>
+<!--
 
-        <div class="bill-info" id="billInfo" style="display: none;">
-    <h3>Billing Information</h3>
-    <p>Welcome, <span id="memberName"></span>.</p>
-    <div class="bill-details">
-        <p><strong>Monthly Collection:</strong> $<span id="monthlyCollection"></span></p>
-        <p><strong>Cleaning Fee:</strong> $<span id="cleaningFee"></span></p>
-        <p><strong>Funeral Charity Fund:</strong> $<span id="funeralCharityFund"></span></p>
-        <p><strong>Basic Work Contribution:</strong> $<span id="basicWork"></span></p>
-        <p><strong>Total Due Amount:</strong> $<span id="totalDue"></span></p>
-    </div>
-</div>
+Tooplate 2137 Barista Cafe
 
-        <div class="admin-panel" id="adminPanel" style="display: none;">
-            <h3>Admin Panel</h3>
-            <form id="addMemberForm">
-                <label for="newUsername">Username:</label>
-                <input type="text" id="newUsername" name="newUsername" placeholder="Enter username">
+https://www.tooplate.com/view/2137-barista-cafe
 
-                <label for="newPassword">Password:</label>
-                <input type="text" id="newPassword" name="newPassword" placeholder="Enter password">
+Bootstrap 5 HTML CSS Template
 
-                <label for="newMonthlyCollection">Monthly Collection:</label>
-                <input type="number" id="newMonthlyCollection" name="newMonthlyCollection" placeholder="Enter amount">
+-->
+    </head>
+    
+    <body>
+                
+            <main>
+                <nav class="navbar navbar-expand-lg">                
+                    <div class="container">
+                        <a class="navbar-brand d-flex align-items-center" href="index.html">
+                            <img src="images/coffee-beans.png" class="navbar-brand-image img-fluid" alt="Barista Cafe Template">
+                            St.Joseph Church
+                        </a>
+        
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+        
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ms-lg-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link click-scroll" href="#section_1">Home</a>
+                                </li>
+        
+                                <li class="nav-item">
+                                    <a class="nav-link click-scroll" href="#section_2">About</a>
+                                </li>
 
-                <label for="newCleaningFee">Cleaning Fee:</label>
-                <input type="number" id="newCleaningFee" name="newCleaningFee" placeholder="Enter amount">
+                                <li class="nav-item">
+                                    <a class="nav-link click-scroll" href="#section_3">Management</a>
+                                </li>
+                            </ul>
 
-                <label for="newFuneralCharityFund">Funeral Charity Fund:</label>
-                <input type="number" id="newFuneralCharityFund" name="newFuneralCharityFund" placeholder="Enter amount">
+                            <div class="ms-lg-3">
+                                <a class="btn custom-btn custom-border-btn" href="login.php">
+                                    Login
+                                    <i class="bi-arrow-up-right ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
 
-                <label for="newBasicWork">Basic Work:</label>
-                <input type="number" id="newBasicWork" name="newBasicWork" placeholder="Enter amount">
 
-                <button type="button" id="addMemberButton">Add Member</button>
-            </form>
+                <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Name</th>
-                        <th>Monthly</th>
-                        <th>Cleaning</th>
-                        <th>Charity</th>
-                        <th>Work</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="membersTable">
-                </tbody>
-            </table>
-        </div>
-    </div>
+                    <div class="container">
+                        <div class="row align-items-center">
 
-    <div class="modal" id="editModal">
-        <div class="modal-content">
-            <h3>Edit Billing Details</h3>
-            <form id="editForm">
-                <label for="editMonthlyCollection">Monthly Collection:</label>
-                <input type="number" id="editMonthlyCollection" name="editMonthlyCollection">
+                            <div class="col-lg-6 col-12 mx-auto">
+                                <em class="small-text">welcome to St.Joseph Church</em>
+                                
+                                <h1>St.Joseph Church</h1>
 
-                <label for="editCleaningFee">Cleaning Fee:</label>
-                <input type="number" id="editCleaningFee" name="editCleaningFee">
+                                <p class="text-white mb-4 pb-lg-2">
+                                    I can do all things <em>through Christ</em> who strengthens me.
+                                </p>
 
-                <label for="editFuneralCharityFund">Funeral Charity Fund:</label>
-                <input type="number" id="editFuneralCharityFund" name="editFuneralCharityFund">
+                                <a class="btn custom-btn custom-border-btn smoothscroll me-3" href="#section_2">
+                                    Our Story
+                                </a>
 
-                <label for="editBasicWork">Basic Work:</label>
-                <input type="number" id="editBasicWork" name="editBasicWork">
+                                <a class="btn custom-btn smoothscroll me-2 mb-2" href="login.php"><strong>Login</strong></a>
+                            </div>
 
-                <button type="submit">Save</button>
-            </form>
-        </div>
-    </div>
+                        </div>
+                    </div>
 
-    <div class="about-section">
-        <h2>About Us</h2>
-        <p>Our church is a community of believers committed to worship, fellowship, and service. 
-           We strive to make a positive impact on our members and society through our faith and dedication.</p>
-    </div>
+                    <div class="hero-slides"></div>
+                </section>
 
-    <script>
-        const members = {
-            'admin': {
-                name: 'Admin',
-                password: 'admin123',
-                isAdmin: true
-            },
-            'akhiljose': {
-                name: 'akhiljose',
-                password: 'akhiljose',
-                billing: {
-                    monthlyCollection: 25,
-                    cleaningFee: 12,
-                    funeralCharityFund: 20,
-                    basicWork: 8,
-                }
-            }
-        };
 
-        const loginForm = document.getElementById('loginForm');
-        const billInfo = document.getElementById('billInfo');
-        const adminPanel = document.getElementById('adminPanel');
-        const memberName = document.getElementById('memberName');
-        const membersTable = document.getElementById('membersTable');
-        const editModal = document.getElementById('editModal');
-        const editForm = document.getElementById('editForm');
-        let currentEditMember = '';
+                <section class="about-section section-padding" id="section_2">
+                    <div class="section-overlay"></div>
+                    <div class="container">
+                        <div class="row align-items-center">
 
-        function updateMembersTable() {
-            membersTable.innerHTML = '';
-            Object.keys(members).forEach(username => {
-                if (!members[username].isAdmin) {
-                    const member = members[username];
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${username}</td>
-                        <td>${member.name}</td>
-                        <td>${member.billing?.monthlyCollection || 0}</td>
-                        <td>${member.billing?.cleaningFee || 0}</td>
-                        <td>${member.billing?.funeralCharityFund || 0}</td>
-                        <td>${member.billing?.basicWork || 0}</td>
-                        <td>
-                            <button onclick="editMember('${username}')">Edit</button>
-                            <button onclick="removeMember('${username}')">Remove</button>
-                        </td>
-                    `;
-                    membersTable.appendChild(row);
-                }
-            });
-        }
+                            <div class="col-lg-6 col-12">
+                                <div class="ratio ratio-1x1" style="background-image: url('https://media.discordapp.net/attachments/968839789006684190/1328740770483535892/WhatsApp_Image_2025-01-14_at_20.29.55_9d729b58.jpg?ex=6787cdc6&is=67867c46&hm=e35c1a2045d86130e9050ae19027010b765c571ce795a8866cc79becdddc3abc&=&format=webp&width=263&height=350'); background-size: cover; background-position: center;">
+                                    <div class="about-video-info d-flex flex-column">
+                                        <h4 class="mt-auto">We Started Since 1970.</h4>
+                                        <h4>St Joseph Church, Arabi</h4>
+                                    </div>
+                                </div>
+                            </div>
 
-        function removeMember(username) {
-            delete members[username];
-            updateMembersTable();
-        }
+                            <div class="col-lg-5 col-12 mt-4 mt-lg-0 mx-auto">
+                                <em class="text-white">Ulikkal</em>
 
-        function editMember(username) {
-            currentEditMember = username;
-            const member = members[username];
-            document.getElementById('editMonthlyCollection').value = member.billing.monthlyCollection;
-            document.getElementById('editCleaningFee').value = member.billing.cleaningFee;
-            document.getElementById('editFuneralCharityFund').value = member.billing.funeralCharityFund;
-            document.getElementById('editBasicWork').value = member.billing.basicWork;
-            editModal.style.display = 'flex';
-        }
+                                <h2 class="text-white mb-3">St.Joseph Church</h2>
 
-        editForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const member = members[currentEditMember];
-            member.billing.monthlyCollection = parseFloat(document.getElementById('editMonthlyCollection').value);
-            member.billing.cleaningFee = parseFloat(document.getElementById('editCleaningFee').value);
-            member.billing.funeralCharityFund = parseFloat(document.getElementById('editFuneralCharityFund').value);
-            member.billing.basicWork = parseFloat(document.getElementById('editBasicWork').value);
-            editModal.style.display = 'none';
-            updateMembersTable();
-        });
+                                <p class="text-white">St. Joseph's Church in Ulikkal, located in the Kannur district of Kerala, India, is a significant place of worship for the local Christian community. The church is part of the Diocese of Thalassery, which is dedicated to St. Joseph.</p>
 
-        document.getElementById('addMemberButton').addEventListener('click', () => {
-            const newUsername = document.getElementById('newUsername').value;
-            const newPassword = document.getElementById('newPassword').value;
-            const newMonthlyCollection = parseFloat(document.getElementById('newMonthlyCollection').value);
-            const newCleaningFee = parseFloat(document.getElementById('newCleaningFee').value);
-            const newFuneralCharityFund = parseFloat(document.getElementById('newFuneralCharityFund').value);
-            const newBasicWork = parseFloat(document.getElementById('newBasicWork').value);
+                                <p class="text-white">Ulikkal is a growing town situated approximately 7.5 km north of the taluk headquarters, Iritty, and about 46 km from the district headquarters, Kannur. The town is known for its harmonious community, where people of various religions and cultures coexist peacefully.</a>.</p>
 
-            members[newUsername] = {
-                name: newUsername,
-                password: newPassword,
-                billing: {
-                    monthlyCollection: newMonthlyCollection,
-                    cleaningFee: newCleaningFee,
-                    funeralCharityFund: newFuneralCharityFund,
-                    basicWork: newBasicWork
-                }
-            };
+                                <a href="login.php" class="smoothscroll btn custom-btn custom-border-btn mt-3 mb-4">Login</a>
+                            </div>
 
-            updateMembersTable();
-        });
+                        </div>
+                    </div>
+                </section>
 
-        loginForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
 
-            if (members[username] && members[username].password === password) {
-                if (members[username].isAdmin) {
-                    adminPanel.style.display = 'block';
-                    billInfo.style.display = 'none';
-                    updateMembersTable();
-                } else {
-                    const billing = members[username].billing;
-                    memberName.textContent = members[username].name;
-                    document.getElementById('monthlyCollection').textContent = billing.monthlyCollection;
-                    document.getElementById('cleaningFee').textContent = billing.cleaningFee;
-                    document.getElementById('funeralCharityFund').textContent = billing.funeralCharityFund;
-                    document.getElementById('basicWork').textContent = billing.basicWork;
-                    document.getElementById('totalDue').textContent = billing.monthlyCollection + billing.cleaningFee + billing.funeralCharityFund + billing.basicWork;
-                    billInfo.style.display = 'block';
-                    adminPanel.style.display = 'none';
-                }
-            } else {
-                alert('Invalid username or password!');
-                billInfo.style.display = 'none';
-                adminPanel.style.display = 'none';
-            }
-        });
-    </script>
-</body>
+                <section class="barista-section section-padding section-bg" id="barista-team">
+                    <div class="container">
+                        <div class="row justify-content-center">
+
+                            <div class="col-lg-12 col-12 text-center mb-4 pb-lg-2">
+                                <em class="text-white">St Joseph Church</em>
+
+                                <h2 class="text-white">Our Managment</h2>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-12 mb-4">
+                                <div class="team-block-wrap">
+                                    <div class="team-block-info d-flex flex-column">
+                                        <div class="d-flex mt-auto mb-3">
+                                            <h4 class="text-white mb-0">Fr.Edwin Koyipuram</h4>
+
+                                            <p class="badge ms-4"><em>Vicar</em></p>
+                                        </div>
+
+                                        <p class="text-white mb-0">God is love.</p>
+                                    </div>
+
+                                    <div class="team-block-image-wrap">
+                                        <img src="images/team/portrait-elegant-old-man-wearing-suit.jpg" class="team-block-image img-fluid" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-12 mb-4">
+                                <div class="team-block-wrap">
+                                    <div class="team-block-info d-flex flex-column">
+                                        <div class="d-flex mt-auto mb-3">
+                                            <h4 class="text-white mb-0">James Palakkunnel</h4>
+
+                                            <p class="badge ms-4"><em>Coordinator</em></p>
+                                        </div>
+
+                                        <p class="text-white mb-0">God is our refuge and strength.</p>
+                                    </div>
+
+                                    <div class="team-block-image-wrap">
+                                        <img src="images/team/cute-korean-barista-girl-pouring-coffee-prepare-filter-batch-brew-pour-working-cafe.jpg" class="team-block-image img-fluid" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-12 mb-4">
+                                <div class="team-block-wrap">
+                                    <div class="team-block-info d-flex flex-column">
+                                        <div class="d-flex mt-auto mb-3">
+                                            <h4 class="text-white mb-0">Sunil Palakkuzhiyil</h4>
+
+                                            <p class="badge ms-4"><em>Kaikkaran</em></p>
+                                        </div>
+
+                                        <p class="text-white mb-0">With God, all things are possible.</p>
+                                    </div>
+
+                                    <div class="team-block-image-wrap">
+                                        <img src="images/team/small-business-owner-drinking-coffee.jpg" class="team-block-image img-fluid" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <div class="team-block-wrap">
+                                    <div class="team-block-info d-flex flex-column">
+                                        <div class="d-flex mt-auto mb-3">
+                                            <h4 class="text-white mb-0">Akhil Jose</h4>
+
+                                            <p class="badge ms-4"><em>Seceretary</em></p>
+                                        </div>
+
+                                        <p class="text-white mb-0">This is the day the Lord has made.</p>
+                                    </div>
+
+                                    <div class="team-block-image-wrap">
+                                        <img src="images/team/smiley-business-woman-working-cashier.jpg" class="team-block-image img-fluid" alt="">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+
+                <section class="menu-section section-padding" id="section_3">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-lg-6 col-12 mb-4 mb-lg-0">
+                                <div class="menu-block-wrap">
+                                    <div class="text-center mb-4 pb-lg-2">
+                                        <em class="text-white">Church</em>
+                                        <h4 class="text-white">Holly Mass Timing</h4>
+                                    </div>
+
+                                    <div class="menu-block">
+                                        <div class="d-flex">
+                                            <h6>Monday</h6>
+                                        
+                                            <span class="underline"></span>
+
+                                            <strong class="ms-auto">6.30am</strong>
+                                        </div>
+
+                                        <div class="border-top mt-2 pt-2">
+                                            <small></small>
+                                        </div>
+                                    </div>
+
+                                    <div class="menu-block">
+                                        <div class="d-flex">
+                                            <h6>Tuesday</h6>
+                                        
+                                            <span class="underline"></span>
+
+                                            <strong class="ms-auto">6.30am</strong>
+                                        </div>
+
+                                        <div class="border-top mt-2 pt-2">
+                                            <small></small>
+                                        </div>
+                                    </div>
+
+                                    <div class="menu-block">
+                                        <div class="d-flex">
+                                            <h6>Wednesday</h6>
+                                        
+                                            <span class="underline"></span>
+
+                                            <strong class="ms-auto">6.30am</strong>
+                                        </div>
+
+                                        <div class="border-top mt-2 pt-2">
+                                            <small></small>
+                                        </div>
+                                    </div>
+
+                                    <div class="menu-block">
+                                        <div class="d-flex">
+                                            <h6>Thursday</h6>
+                                        
+                                            <span class="underline"></span>
+
+                                            <strong class="ms-auto">6.30am</strong>
+                                        </div>
+
+                                        <div class="border-top mt-2 pt-2">
+                                            <small></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-12">
+                                <div class="menu-block-wrap">
+                                    <div class="text-center mb-4 pb-lg-2">
+                                        <em class="text-white">Church</em>
+                                        <h4 class="text-white">Special Mass Timing</h4>
+                                    </div>
+
+                                    <div class="menu-block">
+                                        <div class="d-flex">
+                                            <h6>Friday</h6>
+                                        
+                                            <span class="underline"></span>
+
+                                            <strong class="ms-auto">4.30pm</strong>
+                                        </div>
+
+                                        <div class="border-top mt-2 pt-2">
+                                            <small></small>
+                                        </div>
+                                    </div>
+
+                                    <div class="menu-block">
+                                        <div class="d-flex">
+                                            <h6>Saturday</h6>
+                                        
+                                            <span class="underline"></span>
+
+                                            <strong class="ms-auto">6.30am</strong>
+                                        </div>
+
+                                        <div class="border-top mt-2 pt-2">
+                                            <small></small>
+                                        </div>
+                                    </div>
+
+                                    <div class="menu-block">
+                                        <div class="d-flex">
+                                            <h6>Sunday First</h6>
+                                        
+                                            <span class="underline"></span>
+
+                                            <strong class="ms-auto">8.00am</strong>
+                                        </div>
+
+                                        <div class="border-top mt-2 pt-2">
+                                            <small></small>
+                                        </div>
+                                    </div>
+
+                                    <div class="menu-block">
+                                        <div class="d-flex">
+                                            <h6>Sunday Second</h6>
+                                        
+                                            <span class="underline"></span>
+
+                                            <strong class="ms-auto">10.15am</strong>
+                                        </div>
+
+                                        <div class="border-top mt-2 pt-2">
+                                            <small></small>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="site-footer">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-lg-4 col-12 me-auto">
+                                <em class="text-white d-block mb-4">Where to find us?</em>
+
+                                <strong class="text-white">
+                                    <i class="bi-geo-alt me-2"></i>
+                                    St Joseph Church, Arabi, Ulikal 670705, India
+                                </strong>
+
+                                <ul class="social-icon mt-4">
+                                    <li class="social-icon-item">
+                                        <a href="#" class="social-icon-link bi-facebook">
+                                        </a>
+                                    </li>
+        
+                                    <li class="social-icon-item">
+                                        <a href="https://x.com/minthu" target="_new" class="social-icon-link bi-twitter">
+                                        </a>
+                                    </li>
+
+                                    <li class="social-icon-item">
+                                        <a href="#" class="social-icon-link bi-whatsapp">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="col-lg-3 col-12 mt-4 mb-3 mt-lg-0 mb-lg-0">
+                                <em class="text-white d-block mb-4">Contact</em>
+
+                                <p class="d-flex mb-1">
+                                    <strong class="me-2">Phone:</strong>
+                                    <a href="tel: 305-240-9671" class="site-footer-link">
+                                        (91) 
+                                        6282440684
+                                    </a>
+                                </p>
+
+                                <p class="d-flex">
+                                    <strong class="me-2">Email:</strong>
+
+                                    <a href="mailto:info@yourgmail.com" class="site-footer-link">
+                                        akhiljose060@gmail.com
+                                    </a>
+                                </p>
+                            </div>
+
+                            <div class="col-lg-8 col-12 mt-4">
+                                <p class="copyright-text mb-0">Copyright © St.joseph church 2025-26 </a></p>
+                            </div>
+                    </div>
+                </footer>
+            </main>
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/click-scroll.js"></script>
+        <script src="js/vegas.min.js"></script>
+        <script src="js/custom.js"></script>
+
+    </body>
 </html>
