@@ -51,24 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         $action = $_POST['action'];
 
-        if ($action === 'register') {
-            $username = sanitize($_POST['username']);
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $ward = sanitize($_POST['ward']);
-            $unit = sanitize($_POST['unit']);
-
-            $stmt = $conn->prepare('INSERT INTO users (username, password, ward, unit, is_admin) VALUES (?, ?, ?, ?, 0)');
-            $stmt->bind_param('ssss', $username, $password, $ward, $unit);
-            $stmt->execute();
-
-            // Initialize bill for new user
-            $user_id = $stmt->insert_id;
-            $stmt = $conn->prepare('INSERT INTO bills (user_id, monthly_collection, work, funeral_charity_fund, cleaning) VALUES (?, 100.00, 50.00, 25.00, 75.00)');
-            $stmt->bind_param('i', $user_id);
-            $stmt->execute();
-
-            echo "User registered successfully!";
-        } elseif ($action === 'login') {
+        if ($action === 'login') {
             $username = sanitize($_POST['username']);
             $password = $_POST['password'];
             $stmt = $conn->prepare('SELECT * FROM users WHERE username = ?');
@@ -84,6 +67,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 echo "Invalid username or password.";
             }
+        } elseif ($action === 'add_user' && isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
+            $username = sanitize($_POST['username']);
+            $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $ward = sanitize($_POST['ward']);
+            $unit = sanitize($_POST['unit']);
+
+            $stmt = $conn->prepare('INSERT INTO users (username, password, ward, unit, is_admin) VALUES (?, ?, ?, ?, 0)');
+            $stmt->bind_param('ssss', $username, $password, $ward, $unit);
+            $stmt->execute();
+
+            // Initialize bill for new user
+            $user_id = $stmt->insert_id;
+            $stmt = $conn->prepare('INSERT INTO bills (user_id, monthly_collection, work, funeral_charity_fund, cleaning) VALUES (?, 100.00, 50.00, 25.00, 75.00)');
+            $stmt->bind_param('i', $user_id);
+            $stmt->execute();
+
+            echo "User added successfully!";
         } elseif ($action === 'update_bill' && isset($_SESSION['is_admin']) && $_SESSION['is_admin']) {
             $user_id = sanitize($_POST['user_id']);
             $monthly_collection = sanitize($_POST['monthly_collection']);
@@ -115,9 +115,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Fetch user's bill or all bills for admin
 $bills = [];
+$search_query = '';
 if (isset($_SESSION['user_id'])) {
     if ($_SESSION['is_admin']) {
-        $result = $conn->query('SELECT bills.*, users.username FROM bills JOIN users ON bills.user_id = users.id');
+        // Handle search
+        if (isset($_GET['search'])) {
+            $search_query = sanitize($_GET['search']);
+            $stmt = $conn->prepare('SELECT bills.*, users.username FROM bills JOIN users ON bills.user_id = users.id WHERE users.username LIKE ?');
+            $search_param = "%$search_query%";
+            $stmt->bind_param('s', $search_param);
+            $stmt->execute();
+            $result = $stmt->get_result();
+        } else {
+            $result = $conn->query('SELECT bills.*, users.username FROM bills JOIN users ON bills.user_id = users.id');
+        }
         while ($row = $result->fetch_assoc()) {
             $bills[] = $row;
         }
@@ -139,8 +150,8 @@ if (isset($_SESSION['user_id'])) {
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #141414;
-            color: #ffffff;
+            background-color: #f4f4f4;
+            color: #333;
             margin: 0;
             padding: 0;
         }
@@ -157,50 +168,52 @@ if (isset($_SESSION['user_id'])) {
         }
 
         .header h1 {
-            color: #e50914;
+            color: #333;
         }
 
         .form-container {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .form-container form {
-            width: 45%;
+            width: 100%;
+            max-width: 400px;
             padding: 20px;
-            background-color: #333333;
+            background-color: #fff;
             border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .form-container input[type="text"],
-.form-container input[type="password"],
-.form-container input[type="number"],
-.form-container input[type="submit"] {
-    width: 100%;  /* Ensures full width usage */
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #666666;
-    background-color: #454545;
-    color: #ffffff;
-    box-sizing: border-box;  /* Ensure padding and border are part of the element's width */
-}
-
+        .form-container input[type="password"],
+        .form-container input[type="number"],
+        .form-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
 
         .form-container input[type="submit"] {
-            background-color: #e50914;
+            background-color: #28a745;
+            color: white;
             border: none;
             cursor: pointer;
         }
 
         .form-container input[type="submit"]:hover {
-            background-color: #b81d24;
+            background-color: #218838;
         }
 
         .logout-link {
             display: inline-block;
             margin-top: 20px;
-            background-color: #e50914;
+            background-color: #dc3545;
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -208,7 +221,7 @@ if (isset($_SESSION['user_id'])) {
         }
 
         .logout-link:hover {
-            background-color: #b81d24;
+            background-color: #c82333;
         }
 
         .table-container {
@@ -218,21 +231,22 @@ if (isset($_SESSION['user_id'])) {
         .table-container table {
             width: 100%;
             border-collapse: collapse;
-            color: #ffffff;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .table-container th, .table-container td {
             padding: 12px;
             text-align: left;
-            border-bottom: 1px solid #444444;
+            border-bottom: 1px solid #ddd;
         }
 
         .table-container th {
-            background-color: #222222;
+            background-color: #f8f9fa;
         }
 
         .action-buttons input[type="submit"] {
-            background-color: #e50914;
+            background-color: #007bff;
             color: white;
             cursor: pointer;
             padding: 5px 10px;
@@ -241,41 +255,117 @@ if (isset($_SESSION['user_id'])) {
         }
 
         .action-buttons input[type="submit"]:hover {
-            background-color: #b81d24;
+            background-color: #0056b3;
         }
-        /* Mobile Adjustments */
-@media (max-width: 768px) {
-    .form-container {
-        flex-direction: column;
-        align-items: center;
-    }
 
-    .form-container form {
-        width: 90%;  /* Set forms to 90% width on mobile */
-        margin-bottom: 20px;  /* Space between the forms */
-    }
+        .search-container {
+            margin-bottom: 20px;
+        }
 
-    .header h1 {
-        font-size: 24px;
-    }
+        .search-container input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
 
-    .logout-link {
-        width: 100%;
-        text-align: center;
-    }
+        .search-container input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-    .table-container table {
-        font-size: 14px;
-    }
+        .search-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
 
-    .table-container th, .table-container td {
-        padding: 10px;
-    }
-}
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content input[type="text"],
+        .modal-content input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .modal-content input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .modal-content input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .close-button {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .form-container form {
+                width: 90%;
+            }
+
+            .search-container input[type="text"] {
+                width: 100%;
+            }
+        }
     </style>
+    <script>
+        function openModal() {
+            document.getElementById('addUserModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('addUserModal').style.display = 'none';
+        }
+
+        // Close modal if clicked outside the modal content
+        window.onclick = function(event) {
+            const modal = document.getElementById('addUserModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
 </head>
 <body>
-
 <div class="container">
     <div class="header">
         <h1>Bill System</h1>
@@ -283,17 +373,6 @@ if (isset($_SESSION['user_id'])) {
 
     <?php if (!isset($_SESSION['user_id'])): ?>
         <div class="form-container">
-            <!-- Register Form -->
-            <form method="post">
-                <h2>Register</h2>
-                <input type="hidden" name="action" value="register">
-                <input type="text" name="username" placeholder="Username" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <input type="text" name="ward" placeholder="Ward" required>
-                <input type="text" name="unit" placeholder="Unit" required>
-                <input type="submit" value="Register">
-            </form>
-
             <!-- Login Form -->
             <form method="post">
                 <h2>Login</h2>
@@ -303,8 +382,38 @@ if (isset($_SESSION['user_id'])) {
                 <input type="submit" value="Login">
             </form>
         </div>
-
     <?php else: ?>
+        <?php if ($_SESSION['is_admin']): ?>
+            <!-- Search Form for Admin -->
+            <div class="search-container">
+                <form method="get" action="">
+                    <input type="text" name="search" placeholder="Search by username" value="<?php echo $search_query; ?>">
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+
+            <!-- Add User Button -->
+            <button onclick="openModal()" style="background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                Add User
+            </button>
+
+            <!-- Add User Modal -->
+            <div id="addUserModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-button" onclick="closeModal()">&times;</span>
+                    <h2>Add New User</h2>
+                    <form method="post" action="">
+                        <input type="hidden" name="action" value="add_user">
+                        <input type="text" name="username" placeholder="Username" required>
+                        <input type="password" name="password" placeholder="Password" required>
+                        <input type="text" name="ward" placeholder="Ward">
+                        <input type="text" name="unit" placeholder="Unit">
+                        <input type="submit" value="Add User">
+                    </form>
+                </div>
+            </div>
+        <?php endif; ?>
+
         <div class="table-container">
             <h2>Bills</h2>
             <table>
@@ -354,7 +463,7 @@ if (isset($_SESSION['user_id'])) {
                                 <form method="post" onsubmit="return confirm('Are you sure you want to delete this user?');">
                                     <input type="hidden" name="action" value="delete_user">
                                     <input type="hidden" name="user_id" value="<?php echo isset($bill['user_id']) ? $bill['user_id'] : ''; ?>">
-                                    <input type="submit" value="Delete" style="background-color: #d9534f; color: white;">
+                                    <input type="submit" value="Delete" style="background-color: #dc3545; color: white;">
                                 </form>
                             </td>
                         <?php endif; ?>
@@ -368,6 +477,5 @@ if (isset($_SESSION['user_id'])) {
         </div>
     <?php endif; ?>
 </div>
-
 </body>
 </html>
