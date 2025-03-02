@@ -28,9 +28,20 @@
         <style>
             /* Add space after the header */
             header {
-                margin-bottom: 80px; /* Adjust as needed */
-                background-color: #fc8f00e7;
-            }
+    position: relative;
+    background-color: #fc8f00e7;
+    margin-bottom: 80px; /* Adds space after the header */
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; /* Extends into the margin area */
+    left: 0;
+    width: 100%;
+    height: 80px; /* Matches the margin-bottom */
+    background-color: #fc8f00e7; /* Same as header background */
+}
 
             /* Style for the Google Maps embed */
             .google-map {
